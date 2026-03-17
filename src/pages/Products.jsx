@@ -53,6 +53,12 @@ export default function Products() {
     );
   }
 
+  if (!data?.products?.length) {
+    return (
+      <p className="text-center text-muted-foreground">No products found.</p>
+    );
+  }
+
   if (error) return <p>Something went wrong</p>;
 
   return (
@@ -88,7 +94,7 @@ export default function Products() {
         </Button>
       </div>
 
-      <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {data.products.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}

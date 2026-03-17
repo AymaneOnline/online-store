@@ -1,29 +1,40 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { useCartStore } from "@/store/cartStore";
 import { Link } from "react-router";
 
 export default function ProductCard({ product }) {
+  const addToCart = useCartStore((state) => state.addToCart);
+
   return (
-    <Card className="overflow-hidden">
-      <img
-        src={product.thumbnail}
-        alt={product.title}
-        className="h-48 w-full object-cover"
-      />
+    <Card className="group overflow-hidden rounded-2xl border transition hover:shadow-lg">
+      {/* Image */}
+      <div className="relative h-48 w-full overflow-hidden">
+        <img
+          src={product.thumbnail}
+          alt={product.title}
+          className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
+        />
+      </div>
 
-      <CardHeader>
-        <CardTitle className="text-lg">{product.title}</CardTitle>
-      </CardHeader>
-
-      <CardContent className="flex flex-col gap-3">
-        <Badge variant="secondary">{product.category}</Badge>
-
-        <p className="text-xl font-bold">${product.price}</p>
-
+      <CardContent className="space-y-3 p-4">
+        {/* Title */}
         <Link to={`/products/${product.id}`}>
-          <Button className="w-full">View Product</Button>
+          <h3 className="line-clamp-1 font-semibold hover:underline">
+            {product.title}
+          </h3>
         </Link>
+
+        {/* Price */}
+        <p className="text-lg font-bold">${product.price.toLocaleString()}</p>
+
+        {/* Rating */}
+        <p className="text-sm text-muted-foreground">⭐ {product.rating}</p>
+
+        {/* Button */}
+        <Button className="w-full" onClick={() => addToCart(product)}>
+          Add to Cart
+        </Button>
       </CardContent>
     </Card>
   );
