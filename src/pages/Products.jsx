@@ -19,6 +19,8 @@ import {
 
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
+import { useEffect, useRef } from "react";
+
 function ProductSkeleton() {
   return (
     <div className="space-y-3">
@@ -54,6 +56,27 @@ export default function Products() {
   const { data: categories } = useCategories();
 
   let products = data?.pages.flatMap((page) => page.products) || [];
+
+  const loadMoreRef = useRef();
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && hasNextPage) {
+          fetchNextPage();
+        }
+      },
+      {
+        rootMargin: "100px", // starts loading a bit earlier (better UX)
+      },
+    );
+
+    if (loadMoreRef.current) {
+      observer.observe(loadMoreRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [hasNextPage, fetchNextPage]);
 
   // Sorting
   if (sort === "price-asc") {
@@ -211,16 +234,17 @@ export default function Products() {
             ))}
           </div>
 
-          <div className="mt-10 flex justify-center">
-            {hasNextPage && (
-              <Button
-                onClick={() => fetchNextPage()}
-                disabled={isFetchingNextPage}
-              >
-                {isFetchingNextPage ? "Loading..." : "Load More"}
-              </Button>
-            )}
-          </div>
+          {/* Trigger element */}
+          <div ref={loadMoreRef} className="h-10" />
+
+          {/* Loading state */}
+          {isFetchingNextPage && (
+            <div className="mt-6 grid gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+              {Array.from({ length: 4 }).map((_, i) => (
+                <ProductSkeleton key={i} />
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>
