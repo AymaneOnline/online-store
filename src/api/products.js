@@ -3,9 +3,7 @@ export async function fetchProducts({ search = "", category = "" }) {
 
   if (search) {
     url = `https://dummyjson.com/products/search?q=${search}`;
-  }
-
-  if (category) {
+  } else if (category) {
     url = `https://dummyjson.com/products/category/${category}`;
   }
 

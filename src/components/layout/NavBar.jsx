@@ -13,7 +13,7 @@ export default function Navbar() {
     <nav className="border-b">
       <div className="mx-auto flex max-w-6xl items-center justify-between p-4">
         <Link to="/" className="text-xl font-bold">
-          TechStore
+          OnlineStore
         </Link>
 
         <div className="flex items-center gap-4">

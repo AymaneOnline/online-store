@@ -39,14 +39,21 @@ export default function Products() {
   const category = params.get("category") || "";
   const sort = params.get("sort") || "";
 
-  const { data, isLoading, error } = useProducts({
+  const {
+    data,
+    isLoading,
+    error,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useProducts({
     search: debouncedSearch,
     category,
   });
 
   const { data: categories } = useCategories();
 
-  let products = data?.products || [];
+  let products = data?.pages.flatMap((page) => page.products) || [];
 
   // Sorting
   if (sort === "price-asc") {
@@ -89,7 +96,7 @@ export default function Products() {
 
   if (error) return <p>Something went wrong</p>;
 
-  if (!data?.products?.length) {
+  if (!products.length) {
     return (
       <p className="text-center text-muted-foreground">No products found.</p>
     );
@@ -202,6 +209,17 @@ export default function Products() {
             {products.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
+          </div>
+
+          <div className="mt-10 flex justify-center">
+            {hasNextPage && (
+              <Button
+                onClick={() => fetchNextPage()}
+                disabled={isFetchingNextPage}
+              >
+                {isFetchingNextPage ? "Loading..." : "Load More"}
+              </Button>
+            )}
           </div>
         </div>
       </div>
