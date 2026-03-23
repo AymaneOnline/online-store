@@ -1,16 +1,79 @@
-# React + Vite
+# 🛒 Tech E-commerce App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern e-commerce frontend built with React, Zustand, and shadcn/ui.  
+This project demonstrates a clean shopping experience with cart management and a checkout flow.
 
-Currently, two official plugins are available:
+## 🚀 Live Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+👉 https://aymaneonline.github.io/online-store
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## ✨ Features
 
-## Expanding the ESLint configuration
+- 🛍️ Product listing
+- 🛒 Cart system (add, remove, update quantity)
+- 💰 Dynamic total calculation
+- 📦 Checkout page
+- 🎨 Clean UI with shadcn/ui + Tailwind
+- ⚡ Fast and responsive
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🧠 Tech Stack
+
+- React
+- Zustand (state management)
+- React Router
+- Tailwind CSS
+- shadcn/ui
+- Vite
+
+---
+
+## 📂 Project Structure
+
+```text
+src
+├───api
+├───components
+│   ├───cart
+│   ├───layout
+│   ├───product
+│   ├───theme
+│   └───ui
+├───hooks
+├───lib
+├───pages
+├───routes
+└───store
+```
+
+---
+
+## ⚙️ Installation
+
+```bash
+git clone https://github.com/your-username/your-repo-name.git
+cd your-repo-name
+npm install
+npm run dev
+```
+
+---
+
+## 🎯 Future Improvements
+
+- 🔐 Authentication
+- 💳 Stripe payment integration
+- 🧾 Order history
+- 🌐 Backend (Node.js / Next.js API)
+- 📱 Mobile UX improvements
+
+---
+
+## 📌 Author
+
+**Aymane**  
+Frontend Developer  
+[GitHub](https://github.com/aymaneonline) • [Portfolio](https://aymaneonline.dev)
